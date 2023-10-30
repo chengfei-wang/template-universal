@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: template-universal
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  datasource:
+    url: jdbc:mysql://nfcv.xyz:23306/template-universal?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: dbuser
+    password: dbpassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 10
+      idle-timeout: 30000
+      max-lifetime: 120000
+      connection-test-query: SELECT 1
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: 20000
+rsa:
+  public-key: cert/jwt_rsa.pub
+  private-key: cert/jwt_rsa.key
+remote:
+  info:
+    template-shop-url: https://shop.nfcv.xyz:8082
+    template-universal-url: https://page.nfcv.xyz:20000

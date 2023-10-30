@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+  universal-database:
+    container_name: template-universal-mysql
+    image: template-universal/mysql
+    restart: always
+    build:
+      context: ./mysql/
+      dockerfile: mysql.Dockerfile
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: SNWeofpheYpKtlNAzfhoqACQiFYkqJRl
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpassword
+      MYSQL_DATABASE: template-universal
+    ports:
+      - "23306:3306"
+
+  universal-springboot:
+    container_name: template-universal-springboot
+    image: template-universal/springboot
+    restart: always
+    build:
+      context: ./springboot/
+      dockerfile: springboot.Dockerfile
+    ports:
+      - "20001:20000"
+
+  universal-nginx:
+   container_name: template-universal-nginx
+   image: template-universal/nginx
+   restart: always
+   build:
+     context: ./nginx/
+     dockerfile: nginx.Dockerfile
+   ports:
+     - "20000:80"
